@@ -17,6 +17,9 @@ import com.kms.katalon.core.testobject.ResponseObject
 import com.kms.katalon.core.webservice.keyword.WSBuiltInKeywords as WS
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
+DocumentBuilderFactory dbfactory = DocumentBuilderFactory.newInstance()
+dbfactory.setNamespaceAware(true)
+
 ResponseObject response = WS.sendRequest(findTestObject('Yahoo.com RSS mostviewed'))
 
 if (response.isXmlContentType()) {
@@ -28,8 +31,6 @@ if (response.isXmlContentType()) {
 	InputStream is = content.getInputStream()
 	
 	// parsing XML document
-	DocumentBuilderFactory dbfactory = DocumentBuilderFactory.newInstance()
-	dbfactory.setNamespaceAware(true)
 	DocumentBuilder db = dbfactory.newDocumentBuilder()
 	Document document = db.parse(is)
 	
